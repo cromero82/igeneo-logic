@@ -1,11 +1,10 @@
 package com.ingeneo.logistic.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "type_vehicle")
@@ -13,9 +12,11 @@ import lombok.Setter;
 @Setter
 public class TypeVehicle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(nullable = false)
     private int id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true,length = 50)
     private String name;
 
     @Column(nullable = false, length = 10)
