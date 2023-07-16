@@ -60,6 +60,30 @@ public class TypeVehicleServiceImpl implements TypeVehicleService {
         typeVehicleRepository.deleteById(id);
     }
 
+    @Override
+    public TypeVehicleDTO updatePatchTypeVehicle(int idTipoVehiculo, TypeVehicleDTO tipoVehiculoEnviadoCliente) {
+        Optional<TypeVehicle> tipoVehiculoLeidoBaseDatosOpt = typeVehicleRepository.findById(idTipoVehiculo);
+
+        // funcion .isPresent() determina si realmente encontro el registro
+        if (tipoVehiculoLeidoBaseDatosOpt.isPresent()) {
+
+            // funcion get() accede al objeto que existe segun validacion anterior (if)
+            TypeVehicle typeVehicle = tipoVehiculoLeidoBaseDatosOpt.get();
+
+            if( tipoVehiculoEnviadoCliente.getName() != null && ! tipoVehiculoEnviadoCliente.getName().equals("") ){
+                typeVehicle.setName( tipoVehiculoEnviadoCliente.getName() );
+            }
+
+            if( tipoVehiculoEnviadoCliente.getPattern() != null && ! tipoVehiculoEnviadoCliente.getPattern().equals("") ){
+                typeVehicle.setPattern( tipoVehiculoEnviadoCliente.getPattern() );
+            }
+
+            TypeVehicle updatedTypeVehicle = typeVehicleRepository.save(typeVehicle);
+            return convertToDTO(updatedTypeVehicle);
+        }
+        return null;
+    }
+
     private TypeVehicleDTO convertToDTO(TypeVehicle typeVehicle) {
         return modelMapper.map(typeVehicle, TypeVehicleDTO.class);
     }
