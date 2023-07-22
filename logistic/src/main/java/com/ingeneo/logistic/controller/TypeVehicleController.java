@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/type-vehicles")
+@RequestMapping("/tipo-vehiculo")
 public class TypeVehicleController {
     private final TypeVehicleService typeVehicleService;
     Logger logger = LoggerFactory.getLogger(TypeVehicleController.class);
