@@ -9,7 +9,5 @@ public class TypeVehicleDTO {
     private int id;
     private String name;
     private String pattern;
-
-    // Getters and setters
 }
 
