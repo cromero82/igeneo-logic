@@ -69,19 +69,20 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.1</version> <!-- Use the latest version available -->
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.1</version> <!-- Use the same version as junit-jupiter-api -->
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
-            <version>3.1.0</version>
+            <version>2.5.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -102,16 +103,12 @@
             <!--    Ejecutar maven con las pruebas unitarias    -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <reuseForks>false</reuseForks>
-                    <forkCount>1</forkCount>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.3</version> <!-- Agrega la versión adecuada aquí -->
             </plugin>
 
         </plugins>
