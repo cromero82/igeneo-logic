@@ -49,6 +49,7 @@ public class ColoresServiceImpl implements ColoresService {
             Colores colores = coloresOptional.get();
             colores.setNombre(coloresDTO.getNombre());
             colores.setRgb(coloresDTO.getRgb());
+            colores.setFavorito(coloresDTO.isFavorito());
             Colores updatedColores = coloresRepository.save(colores);
             return convertToDTO(updatedColores);
         }

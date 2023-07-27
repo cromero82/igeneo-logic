@@ -26,5 +26,7 @@ public class Colores {
     @Column(name = "rgb", nullable = false)
     private String rgb;
 
+    @Column(name = "favorito", nullable = false)
+    private boolean favorito ;
 }
 
