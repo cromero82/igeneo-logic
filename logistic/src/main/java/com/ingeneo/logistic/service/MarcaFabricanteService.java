@@ -11,7 +11,7 @@ public interface MarcaFabricanteService {
 
     MarcaFabricanteDTO createMarcaFabricante(MarcaFabricanteDTO marcaFabricanteDTO);
 
-    MarcaFabricanteDTO updateMarcaFabricante(Long id, MarcaFabricanteDTO marcaFabricanteDTO);
+    MarcaFabricanteDTO updateMarcaFabricante(Long id, MarcaFabricanteDTO marcaFabricanteDTO) throws Exception;
 
     void deleteMarcaFabricante(Long id);
 

@@ -1,10 +1,15 @@
 package com.ingeneo.logistic.service.impl;
 
 import com.ingeneo.logistic.domain.dto.MarcaFabricanteDTO;
+import com.ingeneo.logistic.domain.dto.PaisDTO;
 import com.ingeneo.logistic.domain.entity.MarcaFabricante;
+import com.ingeneo.logistic.domain.entity.Pais;
 import com.ingeneo.logistic.repository.MarcaFabricanteRepository;
+import com.ingeneo.logistic.repository.PaisRepository;
 import com.ingeneo.logistic.service.MarcaFabricanteService;
+import com.ingeneo.logistic.service.PaisService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +20,8 @@ import java.util.stream.Collectors;
 public class MarcaFabricanteServiceImpl implements MarcaFabricanteService {
 
     private final MarcaFabricanteRepository marcaFabricanteRepository;
+    @Autowired
+    private PaisRepository paisRepository;
     private final ModelMapper modelMapper;
 
     public MarcaFabricanteServiceImpl(MarcaFabricanteRepository marcaFabricanteRepository, ModelMapper modelMapper) {
@@ -44,15 +51,29 @@ public class MarcaFabricanteServiceImpl implements MarcaFabricanteService {
     }
 
     @Override
-    public MarcaFabricanteDTO updateMarcaFabricante(Long id, MarcaFabricanteDTO marcaFabricanteDTO) {
+    public MarcaFabricanteDTO updateMarcaFabricante(Long id, MarcaFabricanteDTO marcaFabricanteDTO) throws Exception {
         Optional<MarcaFabricante> marcaFabricanteOptional = marcaFabricanteRepository.findById(id);
         if (marcaFabricanteOptional.isPresent()) {
+
             MarcaFabricante marcaFabricante = marcaFabricanteOptional.get();
+
+            Optional<Pais> paisOptional = paisRepository.findById(marcaFabricanteDTO.getPais().getId());
+
+            if(! paisOptional.isPresent() ){
+                throw new Exception("No se encontró pais con id = " + marcaFabricanteDTO.getPais().getId());
+            }else{
+                marcaFabricante.setPais( paisOptional.get() );
+            }
+           marcaFabricante.setNombre(marcaFabricanteDTO.getNombre());
+           marcaFabricante.setCorreoContacto(marcaFabricanteDTO.getCorreoContacto());
+           marcaFabricante.setTelefonoContacto( marcaFabricante.getTelefonoContacto() );
+
             // Update fields here
             MarcaFabricante updatedMarcaFabricante = marcaFabricanteRepository.save(marcaFabricante);
             return convertToDTO(updatedMarcaFabricante);
+        }else{
+            throw new Exception("No se encontró MarcaFabricante con id = "+ id);
         }
-        return null;
     }
 
     @Override

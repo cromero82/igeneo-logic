@@ -49,7 +49,7 @@ public class MarcaFabricanteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MarcaFabricanteDTO> updateMarcaFabricante(@PathVariable Long id, @RequestBody MarcaFabricanteDTO marcaFabricanteDTO) {
+    public ResponseEntity<MarcaFabricanteDTO> updateMarcaFabricante(@PathVariable Long id, @RequestBody MarcaFabricanteDTO marcaFabricanteDTO) throws Exception {
         logger.info("Inicia controlador MarcaFabricanteController{.. al servicio updateMarcaFabricante(..) con nombre = " + marcaFabricanteDTO.getNombre());
         MarcaFabricanteDTO updatedMarcaFabricante = marcaFabricanteService.updateMarcaFabricante(id, marcaFabricanteDTO);
         if (updatedMarcaFabricante != null) {
